@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">     
+            <h1>Student Placement Prediction</h1>
+        </nav>
+        <div class="container-fluid">
+            <form action="/runModel" method="post">
+                {% csrf_token %} 
+                <section>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="10thMarks" class="form-label">10<sup>the</sup>Marks :</label>
+                            <input type="text" id="10thMarks" name="10thMarks" class="form-control" min="0" max="100" value="{{ tenscore }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="12thMarks" class="form-label">12<sup>the</sup>Marks :</label>
+                            <input type="text" id="12thMarks" name="12thMarks" class="form-control" min="0" max="100" value="{{ twlscore }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="GradMarks" class="form-label">Graduation Marks :</label>
+                            <input type="text" id="GradMarks" name="GradMarks" class="form-control" min="0" max="100" value="{{ grdscore }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="pgMarks" class="form-label">Post Graduation Marks :</label>
+                            <input type="text" id="pgMarks" name="pgMarks" class="form-control" min="0" max="100" value="{{ pgScore }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="noBacklogs" class="form-label">Number Of Backlogs :</label>
+                            <input type="number" id="noBacklogs" name="noBacklogs" class="form-control" min="0" max="5" value="{{ bklog }}">
+                        </div>
+                    </div>
+                </section>
+                <hr />
+                <section>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="quants" class="form-label">Quantitative Skills Score :</label>
+                            <input type="text" id="quants" name="quants" class="form-control" min="0" max="100" value="{{ qnt }}"> 
+                        </div>
+                        <div class="col-md-4">
+                            <label for="logical" class="form-label">Logical Skills Score:</label>
+                            <input type="text" id="logical" name="logical" class="form-control" min="0" max="100" value="{{ lgcl }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="verbal" class="form-label">Verbal Skills Score :</label>
+                            <input type="text" id="verbal" name="verbal" class="form-control" min="0" max="100" value="{{ vrbl }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="communication" class="form-label">Communication Skill Level :</label>
+                            <input type="number" id="communication" name="communication" class="form-control" min="1" max="5" value="{{ cmnc }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gd" class="form-label">GD  Level :</label>
+                            <input type="number" id="gd" name="gd" class="form-control" min="1" max="5" value="{{ gd }}">
+                        </div>
+                    </div>
+                </section>
+                <div class="row mt-2">
+                    <div class="col-md-4">
+                        <input type="submit" class="btn btn-primary" value="Run Model" />
+                    </div>
+                </div>
+            </form>
+            <hr />
+            <h3>Result : </h3>
+            {% if result %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                You have high chances of getting places as per your current progess.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% else %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Sorry ! You need to do more work.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endif %}
+        </div>
+    </body>
+</html>
